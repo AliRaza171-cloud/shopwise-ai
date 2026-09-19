@@ -4,9 +4,7 @@
 # NOTE ON DEPLOYMENT: if deploying to Vercel, Vercel does NOT use this
 # file — it builds Next.js directly with its own optimized pipeline.
 # This Dockerfile exists for local dev parity (docker-compose) and for
-# deploying the frontend anywhere else that runs plain containers
-# (Render, Fly.io, your own server), demonstrating the containerization
-# practice even where the chosen host doesn't require it.
+# deploying the frontend anywhere else that runs plain containers.
 
 # ---- deps: install dependencies ----
 FROM node:20-alpine AS deps
@@ -19,6 +17,10 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY frontend/ .
+# Only set for the Docker build — next.config.ts checks this to decide
+# whether to use "standalone" output. Vercel builds never set this, so
+# Vercel's own build pipeline is unaffected.
+ENV BUILD_STANDALONE=true
 RUN npm run build
 
 # ---- runner: minimal production image ----
