@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: shopwise-backend
+    runtime: docker
+    dockerfilePath: ./docker/backend.Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /
+    envVars:
+      # DATABASE_URL points at your Neon connection string — set this
+      # manually in Render's dashboard (Environment tab), never commit
+      # a real connection string to the repo.
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: APIFY_API_TOKEN
+        sync: false
+      - key: APIFY_ACTOR_ID
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+        # Set this to your real Vercel URL once the frontend is deployed,
+        # e.g. https://goai-frontend.vercel.app

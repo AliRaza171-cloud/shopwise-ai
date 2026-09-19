@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light theme */
+  --color-paper: 244 245 247;      /* cool light gray, not cream */
+  --color-paper-dim: 232 234 239;
+  --color-card: 255 255 255;
+  --color-teal: 43 58 103;         /* deep indigo (kept var name "teal" so no component files need touching) */
+  --color-teal-dark: 28 38 71;
+  --color-gold: 226 114 91;        /* warm coral (kept var name "gold" for the same reason) */
+  --color-gold-soft: 240 167 148;
+  --color-ink: 26 31 43;
+  --color-ink-soft: 92 100 120;
+  --color-brick: 209 76 63;
+}
+
+.dark {
+  --color-paper: 18 21 29;
+  --color-paper-dim: 26 30 40;
+  --color-card: 23 27 36;
+  --color-teal: 110 133 201;
+  --color-teal-dark: 168 184 224;
+  --color-gold: 240 145 111;
+  --color-gold-soft: 245 180 155;
+  --color-ink: 232 234 240;
+  --color-ink-soft: 154 162 184;
+  --color-brick: 227 120 112;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--color-paper));
+  color: rgb(var(--color-ink));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: rgb(var(--color-gold-soft));
+  color: rgb(var(--color-ink));
+}
+
+/* Global hover polish for buttons/CTAs across the whole app — targets
+   the utility-class patterns already used everywhere (bg-teal for
+   primary buttons, rounded-sm for button-shaped elements), so this one
+   rule adds hover animation app-wide without editing every component. */
+button, a {
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.18s ease,
+              background-color 0.18s ease,
+              color 0.18s ease,
+              border-color 0.18s ease;
+}
+
+[class*="bg-teal"]:not(input):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(28, 38, 71, 0.25);
+}
+
+a[class*="border-ink"]:hover,
+button[class*="border-ink"]:hover {
+  transform: translateY(-1px);
+}
+
+[class*="bg-card"]:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
