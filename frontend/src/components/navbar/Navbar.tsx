@@ -15,10 +15,10 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-7 py-5 flex items-center justify-between">
         <Link href="/" className="flex items-baseline gap-2.5">
           <span className="font-display font-bold text-2xl tracking-tight text-teal-dark">
-            Sahi
+            ShopAI
           </span>
           <span className="font-mono text-[11px] text-ink-soft hidden sm:inline">
-            sahi daam. sahi cheez.
+            ShopAI: Your Smart Shopping Companion
           </span>
         </Link>
 
